@@ -23,6 +23,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth; /* Hiệu ứng trượt mượt mà */
+}
+
 body {
   font-family: 'Nunito', sans-serif;
   color: var(--text-dark);
@@ -73,23 +77,50 @@ header img {
   margin-right: 10px;
 }
 
-header nav {
+/* --- BẮT ĐẦU PHẦN MENU KIỂU VIÊN THUỐC --- */
+.sean-nav {
   display: flex;
-  gap: 25px;
+  align-items: center;
+  gap: 15px; 
 }
 
-header nav a {
-  font-weight: 600;
-  font-size: 0.95rem;
+.sean-nav .nav-item {
+  text-decoration: none;
   color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 30px;
   transition: var(--transition);
 }
 
-header nav a:hover {
+.sean-nav .nav-item:hover:not(.active) {
+  background-color: var(--bg-gray);
   color: var(--primary);
 }
 
-/* Nút Đăng ký học trên Header */
+.sean-nav .nav-item.active {
+  background-color: var(--secondary); /* Dùng màu vàng của web làm nền viên thuốc */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sean-nav .nav-item.active .slash {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text-dark);
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+}
+/* --- KẾT THÚC PHẦN MENU --- */
+
+/* Nút Đăng ký học trên Header (VẪN GIỮ NGUYÊN) */
 header > div > a:last-child {
   background-color: var(--primary);
   color: var(--white);
