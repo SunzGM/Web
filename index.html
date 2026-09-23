@@ -4,66 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPIC Talent Center</title>
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-  <!-- Thay link CSS của bạn vào đây -->
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="preload" href="fonts/ten-font.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css?v=2"> 
 </head>
 <body id="top">
   
   
 
-  <header>
-  <div>
-    <a aria-label="EPIC Talent Center" href="#trang-chu">
-      <img alt="EPIC Talent Center" src="assets/logo1A.png">
-      <span>EPIC<span>TALENT CENTER</span></span>
-    </a>
+  <!-- THANH ĐIỀU KHIỂN NỔI (FLOATING NAV) -->
+<header class="floating-header">
+  <nav class="sean-nav-pill" aria-label="Điều hướng chính">
+    <!-- Di chuyển class active và dấu / tùy theo trang bạn đang đứng nhé -->
+    <a href="index.html" class="nav-item active">WORK <span class="slash">/</span></a>
+    <a href="about.html" class="nav-item">ABOUT</a>
     
-    <nav class="sean-nav" aria-label="Điều hướng chính">
-    <!-- Đang ở trang chủ nên TRANG CHỦ có class active -->
-    <a href="index.html" class="nav-item active">TRANG CHỦ <span class="slash">/</span></a>
-    <a href="epic.html" class="nav-item">EPIC</a>
+    <!-- Giả sử đây là trang CHƯƠNG TRÌNH đang được bật (giống nút Play) -->
     <a href="chuong-trinh.html" class="nav-item">CHƯƠNG TRÌNH</a>
+    
     <a href="giao-vien.html" class="nav-item">GIÁO VIÊN</a>
     <a href="hoat-dong.html" class="nav-item">HOẠT ĐỘNG</a>
     <a href="lien-he.html" class="nav-item">LIÊN HỆ</a>
   </nav>
-
-    <a href="#dang-ky">Đăng ký học <span>↗</span></a>
-  </div>
 </header>
 
   <main>
     <!-- Section: Hero / Banner -->
     <section id="trang-chu">
-      <div aria-hidden="true">
-        <span>✦</span><span>♪</span>
-        <span>🎨</span><span>★</span>
-        <span></span><span>♫</span>
-      </div>
-      <div>
-        <div>
-          <div><span>✦</span> KHƠI MỞ TIỀM NĂNG</div>
-          <h1>EPIC – Thỏa sức đam mê,<br><em>khơi nguồn sáng tạo</em></h1>
-          <p>Trung tâm đào tạo năng khiếu dành cho trẻ em từ <strong>4–18 tuổi</strong>, nơi mỗi bạn nhỏ được tự tin khám phá điều mình yêu thích.</p>
-          <div>
-            <a href="lien-he.html">Đăng ký học <span>↗</span></a>
-            <a href="chuong-trinh.html">Khám phá chương trình <span>→</span></a>
-          </div>
-          <div><span>✦</span> Học để vui – Vui để tỏa sáng</div>
-        </div>
-        <div>
-          <div></div><div></div><div></div>
-          <div>
-            <div>🎨</div>
-            <strong>KHU VỰC HÌNH ẢNH</strong>
-            <span>Ảnh học viên / lớp học sẽ được thay tại đây</span>
-          </div>
-          <div>♪</div><div>★</div><div>● ● ●</div>
-        </div>
-      </div>
-    </section>
+    <h1>Khơi mở tiềm năng,<br>Thỏa sức đam mê</h1>
+    <p>Trung tâm đào tạo năng khiếu dành cho trẻ em từ 4–18 tuổi. Nơi mỗi bạn nhỏ được tự tin khám phá điều mình yêu thích.</p>
+    
+
+    <!-- Khung chứa hình ảnh trung tâm -->
+    <div class="hero-image">
+      <h2>(Khu vực chèn hình ảnh minh họa của bạn)</h2>
+    </div>
+  </section>
   </main>
 
   <footer>
@@ -75,5 +50,22 @@
     <div>© <span>2024</span> EPIC Talent Center. All rights reserved.</div>
   </footer>
 
+  <!-- BỘ NÃO JAVASCRIPT XỬ LÝ MENU CUỘN -->
+  <script>
+    // Lắng nghe hành động cuộn chuột của người dùng
+    window.addEventListener('scroll', function() {
+      // Tìm cái menu viên thuốc
+      const navPill = document.querySelector('.sean-nav-pill');
+      
+      // Nếu cuộn xuống quá 20px thì bật nền màu kem lên
+      if (window.scrollY > 20) {
+        navPill.classList.add('scrolled');
+      } 
+      // Nếu kéo ngược lại lên kịch trần thì tắt nền đi (trở về trong suốt)
+      else {
+        navPill.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>

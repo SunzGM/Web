@@ -1,20 +1,25 @@
 /* =========================================
-   1. BIẾN MÀU SẮC & PHÔNG CHỮ CHUNG
+   1. BIẾN MÀU SẮC & CÀI ĐẶT CHUNG (SEAN HALPIN CLONE)
 ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap');
+@font-face {
+  font-family: 'FontCuaToi'; /* Đặt tên gì tùy bạn */
+  font-style: normal;
+  font-weight: 400 900; 
+  /* Trỏ đường dẫn vào file ttf trong thư mục fonts */
+  src: url('fonts/A.ttf') format('truetype');
+}
 
 :root {
-  --primary: #6c5ce7;      /* Tím chủ đạo */
-  --secondary: #fdcb6e;    /* Vàng nổi bật */
-  --accent: #ff7675;       /* Hồng nhấn */
-  --text-dark: #2d3436;
-  --text-light: #636e72;
-  --bg-light: #fdfdfd;
-  --bg-gray: #f5f6fa;
+  --text-dark: #37534a;      
+  --text-light: #648275;     
+  --bg-gradient: linear-gradient(to right, #e3dec0, #cee4b3);
+  --bg-card: #f5f7e6;        
+  --accent: #405b53;         
+  --nav-active: #ecf0d6;     
   --white: #ffffff;
-  --radius: 16px;
-  --shadow: 0 10px 30px rgba(0,0,0,0.08);
-  --transition: all 0.3s ease;
+  --radius: 32px;            
+  --radius-pill: 50px;       
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 * {
@@ -23,401 +28,354 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth; /* Hiệu ứng trượt mượt mà */
-}
-
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'A', sans-serif;
   color: var(--text-dark);
-  background-color: var(--bg-light);
+  
+  /* Đặt màu nền tảng là Vàng kem */
+  background-color: #fef0bc; 
+  
+  /* Tạo 4 "cục" màu loang hòa trộn vào nhau trong cùng 1 khung hình */
+  background-image: 
+    radial-gradient(circle at 0% 0%, #ffdae0 0%, transparent 50%),    /* Hồng ở góc trên trái */
+    radial-gradient(circle at 100% 0%, #cbe1ff 0%, transparent 50%),  /* Xanh biển ở trên phải */
+    radial-gradient(circle at 100% 100%, #c3f0d5 0%, transparent 50%),/* Xanh lá ở dưới phải */
+    radial-gradient(circle at 0% 100%, #fef0bc 0%, transparent 50%);  /* Vàng kem ở dưới trái */
+  
+  /* Phóng to vùng nền để các mảng màu lấn sâu vào nhau */
+  background-size: 200% 200%;
+  
+  /* Chạy hiệu ứng trôi nổi liên tục. Dùng 'alternate' để nó trôi qua trôi lại mượt mà */
+  animation: meshChuyenMau 2.5s ease-in-out infinite alternate;
+  
+  min-height: 100vh;
   line-height: 1.6;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Đạo diễn hiệu ứng mảng màu trôi nổi hòa quyện */
+@keyframes meshChuyenMau {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
-h1, h2, h3 {
-  line-height: 1.3;
-  color: var(--text-dark);
-}
-
-em {
-  color: var(--primary);
-  font-style: normal;
-}
+a { text-decoration: none; color: inherit; }
 
 /* =========================================
-   2. HEADER & ĐIỀU HƯỚNG
+   2. ANIMATION (HIỆU ỨNG LÚC BẬT WEB)
 ========================================= */
-header {
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Gắn hiệu ứng nảy cho NỘI DUNG CỦA CẢ 2 TRANG */
+/* LƯU Ý: Đã cố tình bỏ 'header' ra ngoài để thanh menu đứng im như mỏ neo */
+#trang-chu h1, #trang-chu p, .hero-buttons, .hero-image, article,
+.about-intro, .profile-grid, .values-container .value-item {
+  opacity: 0; 
+  animation: slideUpFade 1.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;
+}
+
+/* 2. Cài đặt độ trễ cho TRANG CHỦ (Từng nhịp một) */
+#trang-chu h1 { animation-delay: 0.05s; }
+#trang-chu p { animation-delay: 0.1s; }
+.hero-buttons { animation-delay: 0.15s; }
+.hero-image { animation-delay: 0.2s; }
+article:nth-child(1) { animation-delay: 0.1s; }
+article:nth-child(2) { animation-delay: 0.15s; }
+article:nth-child(3) { animation-delay: 0.2s; }
+
+/* 3. Cài đặt độ trễ cho TRANG ABOUT (Khắc phục lỗi "nhảy quá nhanh") */
+.about-intro { animation-delay: 0.05s; }
+.profile-grid { animation-delay: 0.15s; }
+.values-container .value-item:nth-child(1) { animation-delay: 0.1s; }
+.values-container .value-item:nth-child(2) { animation-delay: 0.15s; }
+.values-container .value-item:nth-child(3) { animation-delay: 0.2s; }
+.values-container .value-item:nth-child(4) { animation-delay: 0.25s; }
+
+/* =========================================
+   3. HEADER & MENU VIÊN THUỐC
+========================================= */
+.floating-header {
   position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  top: 25px;
+  display: flex;
+  justify-content: center;
   z-index: 1000;
-  padding: 15px 20px;
+  pointer-events: none;
+  padding: 0 20px;
 }
 
-header > div {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header img {
-  height: 40px;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-/* --- BẮT ĐẦU PHẦN MENU KIỂU VIÊN THUỐC --- */
-.sean-nav {
+.sean-nav-pill {
+  pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: 15px; 
+  background-color: transparent; 
+  padding: 6px 8px;
+  border-radius: 50px;
+  transition: all 0.3s ease; 
 }
 
-.sean-nav .nav-item {
-  text-decoration: none;
+.sean-nav-pill.scrolled {
+  background-color: rgba(241, 242, 233, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.sean-nav-pill .nav-item {
   color: var(--text-dark);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 30px;
-  transition: var(--transition);
-}
-
-.sean-nav .nav-item:hover:not(.active) {
-  background-color: var(--bg-gray);
-  color: var(--primary);
-}
-
-.sean-nav .nav-item.active {
-  background-color: var(--secondary); /* Dùng màu vàng của web làm nền viên thuốc */
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 50px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.sean-nav .nav-item.active .slash {
+.sean-nav-pill .nav-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sean-nav-pill .nav-item.active {
+  background-color: #ffffff; /* Mình sửa lại thành trắng tinh cho giống nút Play */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: var(--text-dark);
+}
+
+.sean-nav-pill .slash {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   font-size: 12px;
-  font-weight: bold;
-  color: var(--text-dark);
-  border: 1.5px solid rgba(0,0,0,0.1);
+  font-weight: 900;
+  color: #7b9487;
+  border: 1.5px solid #d4dac4;
   border-radius: 6px;
-}
-/* --- KẾT THÚC PHẦN MENU --- */
-
-/* Nút Đăng ký học trên Header (VẪN GIỮ NGUYÊN) */
-header > div > a:last-child {
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  transition: var(--transition);
-}
-
-header > div > a:last-child:hover {
-  background-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* =========================================
-   3. BỐ CỤC CHUNG CỦA CÁC SECTION
-========================================= */
-section {
-  padding: 80px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-section:nth-child(even) {
-  background-color: var(--bg-gray);
-}
-
-section > div:not([aria-hidden]) {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-/* Tiêu đề mục (Section Titles) */
-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
-section > div > div:first-child > div:first-child {
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-left: 2px;
 }
 
 /* =========================================
    4. HERO SECTION (TRANG CHỦ)
 ========================================= */
 #trang-chu {
-  padding-top: 100px;
-  padding-bottom: 100px;
-  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-}
-
-#trang-chu > div:not([aria-hidden]) {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  padding: 60px 20px 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 60px;
 }
 
 #trang-chu h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
   margin-bottom: 20px;
+  max-width: 800px;
+  line-height: 1.1;
 }
 
 #trang-chu p {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: var(--text-light);
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  max-width: 600px;
+  font-weight: 600;
 }
 
-/* Các nút bấm ở Hero */
-#trang-chu > div > div:first-child > div:nth-of-type(2) {
+.hero-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-#trang-chu > div > div:first-child > div:nth-of-type(2) a {
-  padding: 12px 28px;
-  border-radius: 30px;
-  font-weight: 700;
-  transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Nút chính */
-#trang-chu > div > div:first-child > div:nth-of-type(2) a:nth-child(1) {
-  background-color: var(--accent);
-  color: white;
-}
-
-/* Nút phụ */
-#trang-chu > div > div:first-child > div:nth-of-type(2) a:nth-child(2) {
-  background-color: white;
-  color: var(--text-dark);
-  border: 2px solid #eee;
-}
-
-#trang-chu > div > div:first-child > div:nth-of-type(2) a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* Khung hình ảnh giả lập (Bên phải Hero) */
-#trang-chu > div > div:last-child > div:nth-child(4) {
-  background: white;
-  padding: 40px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  border: 2px dashed #ccc;
+  gap: 20px;
+  margin-bottom: 60px;
 }
 
-/* =========================================
-   5. CÁC THẺ BÀI VIẾT / KHÓA HỌC (ARTICLES)
-========================================= */
-/* Bố cục Grid cho Lớp năng khiếu, Lý do, Giáo viên */
-#chuong-trinh > div > div:last-child,
-#giao-vien > div > div:last-child,
-section:nth-of-type(4) > div > div:last-child {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-article {
-  background: var(--white);
-  padding: 30px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+.hero-buttons a {
+  padding: 16px 40px;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: 1.1rem;
   transition: var(--transition);
-  position: relative;
+}
+
+.hero-buttons a:nth-child(1) {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.hero-buttons a:nth-child(2) {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+}
+
+.hero-buttons a:hover {
+  transform: translateY(-5px);
+}
+
+.hero-image {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 1000px;
+  height: 500px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 30px 60px rgba(55, 83, 74, 0.08);
+}
+/* =========================================
+   5. TRANG EPIC (ABOUT PAGE - SEAN HALPIN STYLE)
+========================================= */
+/* 1. Tiêu đề siêu to */
+.about-intro {
+  text-align: center;
+  padding: 80px 20px 40px;
+}
+
+.giant-heading {
+  font-size: 8rem; /* Chữ siêu to */
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1;
+  color: var(--text-dark);
+}
+
+/* 2. Ảnh cổng vòm và Text */
+.about-profile {
+  padding: 0 20px 100px;
+  max-width: 1000px; /* Thu hẹp lại để giống tỷ lệ ảnh gốc */
+  margin: 0 auto;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Cột phải to hơn cột trái */
+  gap: 60px;
+  align-items: center;
+}
+
+/* Cắt ảnh thành hình cổng vòm (Arch) */
+.profile-arch {
+  width: 100%;
+  aspect-ratio: 1 / 1.1; /* Tỷ lệ hơi cao hơn vuông */
+  background-color: #d8c3b1; /* Màu nền dự phòng nếu ảnh lỗi */
+  border-top-left-radius: 200px; /* Bo tròn hoàn toàn 2 góc trên */
+  border-top-right-radius: 200px;
+  border-bottom-left-radius: 20px; /* Dưới bo ít */
+  border-bottom-right-radius: 20px;
   overflow: hidden;
 }
 
-article:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+.profile-arch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-article h3 {
-  font-size: 1.4rem;
-  margin: 15px 0 10px;
-  color: var(--primary);
-}
-
-article p {
-  color: var(--text-light);
-  margin-bottom: 20px;
-}
-
-article a {
-  font-weight: 700;
-  color: var(--accent);
-}
-
-article a:hover {
-  text-decoration: underline;
-}
-
-/* =========================================
-   6. GRID TÙY CHỈNH (Hoạt động, Liên hệ)
-========================================= */
-#hoat-dong > div > div:last-child {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-#hoat-dong > div > div:last-child > div {
-  background: var(--white);
-  padding: 15px 25px;
-  border-radius: 50px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#lien-he > div > div:last-child {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-#lien-he > div > div:last-child > div {
-  background: var(--white);
-  padding: 20px;
-  border-radius: var(--radius);
-  display: flex;
-  gap: 15px;
-  align-items: flex-start;
-  box-shadow: var(--shadow);
-}
-
-#lien-he small {
-  display: block;
-  color: var(--text-light);
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-/* =========================================
-   7. FOOTER
-========================================= */
-footer {
-  background-color: var(--text-dark);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 60px 20px 20px;
-  text-align: center;
-}
-
-footer > div:first-child {
-  max-width: 1200px;
-  margin: 0 auto 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-footer > div:first-child > div {
-  font-size: 1.5rem;
+.profile-text h2 {
+  font-size: 2.5rem;
   font-weight: 800;
-  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 25px;
+  letter-spacing: -1px;
 }
 
-footer > div:first-child > div span {
-  color: var(--secondary);
-  margin-left: 5px;
+.profile-text p {
+  font-size: 1.15rem;
+  color: #556b62; /* Màu chữ nhạt hơn tí */
+  margin-bottom: 20px;
+  font-weight: 500;
+  line-height: 1.7;
 }
 
-footer a[aria-label="Về đầu trang"] {
-  display: inline-block;
-  background: rgba(255,255,255,0.1);
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50%;
-  color: var(--white);
-  margin-top: 20px;
-  transition: var(--transition);
+/* 3. Khối 4 Giá trị cốt lõi */
+.about-values {
+  padding: 0 20px 100px;
 }
 
-footer a[aria-label="Về đầu trang"]:hover {
-  background: var(--primary);
+.values-container {
+  background-color: #f6f5ee; /* Nền trắng kem nhạt y hình 2 */
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 40px; /* Khối bo góc bự */
+  padding: 80px;
 }
 
-footer > div:last-child {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 20px;
-  font-size: 0.9rem;
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 cột */
+  gap: 60px 80px; /* Khoảng cách hàng ngang 60, dọc 80 */
+}
+
+.value-item .value-number {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #8da498; /* Màu xanh ngọc nhạt cho số */
+  display: block;
+  margin-bottom: 15px;
+}
+
+.value-item h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.value-item p {
+  font-size: 1.1rem;
+  color: #556b62;
+  line-height: 1.7;
 }
 
 /* =========================================
-   8. RESPONSIVE (DÀNH CHO ĐIỆN THOẠI & TABLET)
+   RESPONSIVE (ĐIỆN THOẠI)
 ========================================= */
-@media (max-width: 992px) {
-  #trang-chu > div:not([aria-hidden]) {
+@media (max-width: 768px) {
+  .giant-heading {
+    font-size: 4rem;
+    letter-spacing: -2px;
+  }
+  
+  .profile-grid {
     grid-template-columns: 1fr;
     text-align: center;
   }
   
-  #trang-chu > div > div:first-child > div:nth-of-type(2) {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  header nav {
-    display: none; /* Ẩn menu trên mobile để gọn, trong thực tế cần thêm nút Hamburger menu */
+  .profile-arch {
+    max-width: 300px;
+    margin: 0 auto;
   }
   
-  section h2 {
-    font-size: 2rem;
+  .values-container {
+    padding: 40px 20px;
   }
   
-  #trang-chu h1 {
-    font-size: 2.5rem;
-  }
-  
-  #lien-he > div > div:last-child {
+  .values-grid {
     grid-template-columns: 1fr;
   }
 }
