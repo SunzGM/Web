@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPIC Talent Center</title>
+  <link rel="preload" href="fonts/ten-font.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css?v=2"> 
+</head>
+<body id="top">
+  
+  
+
+  <!-- THANH ĐIỀU KHIỂN NỔI (FLOATING NAV) -->
+<header class="floating-header">
+  <nav class="sean-nav-pill" aria-label="Điều hướng chính">
+    <!-- Di chuyển class active và dấu / tùy theo trang bạn đang đứng nhé -->
+    <a href="index.html" class="nav-item">WORK <span class="slash">/</span></a>
+    <a href="about.html" class="nav-item">ABOUT</a>
+    
+    <a href="play.html" class="nav-item active">PLAY</a>
+    
+    <a href="giao-vien.html" class="nav-item">GIÁO VIÊN</a>
+    <a href="hoat-dong.html" class="nav-item">HOẠT ĐỘNG</a>
+    <a href="lien-he.html" class="nav-item">LIÊN HỆ</a>
+  </nav>
+</header>
+
+<main class="play-page">
+  <!-- Phần 1: Tiêu đề siêu to có ngôi sao -->
+  <section class="play-hero">
+    <h1 class="giant-heading">Chương trình.<span class="sparkle">✦</span></h1>
+    <p>Khám phá các khóa học và hoạt động ngoại khóa đa dạng, được thiết kế để khơi gợi niềm vui, sự sáng tạo & đôi khi là một chút phá cách.</p>
+  </section>
+
+  <!-- Phần 2: Lưới các thẻ bài (Cards Grid) -->
+  <section class="play-grid-section">
+    <div class="play-grid">
+      
+      <!-- Thẻ bài kiểu 1: Hình ảnh to nằm bên dưới (Giống Droplette) -->
+      <a href="#" class="play-card card-tall">
+        <div class="card-text">
+          <h3>Mỹ thuật Sáng tạo</h3>
+          <p>Học cách phối màu, vẽ phác thảo và phát triển tư duy thẩm mỹ qua từng nét cọ.</p>
+        </div>
+        <div class="card-image dark-ui">
+          <!-- Giả lập giao diện hình ảnh minh họa -->
+          <div class="fake-dot red"></div>
+          <div class="fake-dot yellow"></div>
+          <div class="fake-dot green"></div>
+        </div>
+      </a>
+
+      <!-- Thẻ bài kiểu 2: Icon tròn nằm bên phải (Giống Browso) -->
+      <a href="#" class="play-card card-row">
+        <div class="card-text">
+          <h3>Lập trình Nhí <span class="badge">Mới</span></h3>
+          <p>Làm quen với tư duy logic và tự tay tạo ra trò chơi đầu tiên.</p>
+        </div>
+        <div class="card-icon blue-icon">
+          💻
+        </div>
+      </a>
+
+      <!-- Thẻ bài kiểu 2 khác -->
+      <a href="#" class="play-card card-row">
+        <div class="card-text">
+          <h3>Kỹ năng Thuyết trình</h3>
+          <p>Tự tin đứng trước đám đông và truyền đạt ý tưởng lôi cuốn.</p>
+        </div>
+        <div class="card-icon pink-icon">
+          🎤
+        </div>
+      </a>
+
+      <!-- Thẻ bài kiểu 1 khác -->
+      <a href="#" class="play-card card-tall">
+        <div class="card-text">
+          <h3>Âm nhạc & Nhịp điệu</h3>
+          <p>Cảm thụ âm nhạc, học chơi nhạc cụ và hòa mình vào những giai điệu vui nhộn.</p>
+        </div>
+        <div class="card-image purple-ui">
+           <div class="fake-wave"></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+  <footer>
+    <div>
+      <div>EPIC<span>TALENT CENTER</span></div>
+      <p>Thỏa sức đam mê, khơi nguồn sáng tạo.</p>
+      <a aria-label="Về đầu trang" href="#top">↑</a>
+    </div>
+    <div>© <span>2024</span> EPIC Talent Center. All rights reserved.</div>
+  </footer>
+
+  <!-- BỘ NÃO JAVASCRIPT XỬ LÝ MENU CUỘN -->
+  <script>
+    // Lắng nghe hành động cuộn chuột của người dùng
+    window.addEventListener('scroll', function() {
+      // Tìm cái menu viên thuốc
+      const navPill = document.querySelector('.sean-nav-pill');
+      
+      // Nếu cuộn xuống quá 20px thì bật nền màu kem lên
+      if (window.scrollY > 20) {
+        navPill.classList.add('scrolled');
+      } 
+      // Nếu kéo ngược lại lên kịch trần thì tắt nền đi (trở về trong suốt)
+      else {
+        navPill.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
