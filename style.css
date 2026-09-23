@@ -97,7 +97,8 @@ a { text-decoration: none; color: inherit; }
 /* LƯU Ý: Đã cố tình bỏ 'header' ra ngoài để thanh menu đứng im như mỏ neo */
 #trang-chu h1, #trang-chu p, .hero-buttons, .hero-image, article,
 .about-intro, .profile-grid, .values-container .value-item,
-.play-hero h1, .play-hero p, .play-card {
+.play-hero h1, .play-hero p, .play-card,
+.notes-hero h1, .notes-hero p, .note-item {
   opacity: 0; 
   animation: slideUpFade 1.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;
 }
@@ -126,6 +127,13 @@ article:nth-child(3) { animation-delay: 0.2s; }
 .play-card:nth-child(2) { animation-delay: 0.2s; }
 .play-card:nth-child(3) { animation-delay: 0.25s; }
 .play-card:nth-child(4) { animation-delay: 0.3s; }
+
+/* 5. Độ trễ cho TRANG GIÁO VIÊN (NOTES) */
+.notes-hero h1 { animation-delay: 0.05s; }
+.notes-hero p { animation-delay: 0.1s; }
+.note-item:nth-child(1) { animation-delay: 0.15s; }
+.note-item:nth-child(2) { animation-delay: 0.2s; }
+.note-item:nth-child(3) { animation-delay: 0.25s; }
 
 /* =========================================
    3. HEADER & MENU VIÊN THUỐC
@@ -551,4 +559,94 @@ article:nth-child(3) { animation-delay: 0.2s; }
   .card-icon { width: 80px; height: 80px; font-size: 2rem; }
   .play-hero h1 { font-size: 4rem; }
   .sparkle { font-size: 3rem; right: -30px; }
+}
+/* =========================================
+   7. TRANG GIÁO VIÊN (NOTES PAGE CLONE)
+========================================= */
+.notes-page {
+  padding-bottom: 120px;
+}
+
+.notes-hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.notes-hero h1 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.notes-hero p {
+  font-size: 1.3rem;
+  color: #556b62;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Danh sách xếp dọc - Ép hẹp lại 800px để tập trung thị giác */
+.notes-list-section {
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Khoảng cách đều tăm tắp giữa các thẻ */
+}
+
+/* Thẻ bài phong cách Notes */
+.note-item {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.3); /* Mờ mờ hòa vào nền lưới gradient */
+  padding: 45px 50px;
+  border-radius: 40px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.1, 1, 0.2, 1);
+  border: 3px solid transparent;
+}
+
+/* Trạng thái Hover: Sáng bừng và nảy nhẹ lên */
+.note-item:hover {
+  transform: translateY(-8px);
+  background-color: rgba(255, 255, 255, 0.85); 
+  box-shadow: 0 20px 40px rgba(55, 83, 74, 0.05);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.note-meta {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #7b9487;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.note-item h3 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.note-item p {
+  font-size: 1.15rem;
+  color: #556b62;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notes-hero h1 { font-size: 4rem; }
+  .note-item { padding: 35px 30px; border-radius: 30px; }
+  .note-item h3 { font-size: 1.8rem; }
 }
